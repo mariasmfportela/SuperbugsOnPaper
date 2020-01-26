@@ -21,9 +21,7 @@
   <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
 
   <!-- Theme CSS - Includes Bootstrap -->
-  <link href="css/creative.min.css" rel="stylesheet">
-
-  <!-- Project CSS -->
+  <link href="css/creative.css" rel="stylesheet">
 
 
 </head>
@@ -68,7 +66,7 @@
           <hr class="divider my-4">
         </div>
         <div class="col-lg-8 align-self-baseline">
-          <p class="text-white-75 font-weight-light mb-5">Write some cleverly thought through text introducing the project and how awesome it is!</p>
+          <p class="text-white-75 font-weight-light mb-5">A simple and easy-to-use device to diagnose CRE infections at the point of care</p>
           <a class="btn btn-primary btn-xl js-scroll-trigger" href="#instructions">Start</a>
         </div>
       </div>
@@ -78,35 +76,35 @@
   <!-- Instructions Section -->
   <section class="page-section" id="instructions">
     <div class="container">
-      <h2 class="text-center mt-0">Instructions of use</h2>
+      <h2 class="text-center mt-0">Easy to use</h2>
       <hr class="divider my-4">
       <div class="row">
         <div class="col-lg-3 col-md-6 text-center">
           <div class="mt-5">
             <i class="fas fa-4x fa-tint text-primary mb-4"></i>
-            <h3 class="h4 mb-2">Step one</h3>
-            <p class="text-muted mb-0">Ideally use diagrams or icons...</p>
+            <h3 class="h4 mb-2">Collect</h3>
+            <p class="text-muted mb-0">Collect a 50ul blood sample with a finger-prick</p>
           </div>
         </div>
         <div class="col-lg-3 col-md-6 text-center">
           <div class="mt-5">
-            <i class="fas fa-4x fa-dna text-primary mb-4"></i>
-            <h3 class="h4 mb-2">Step two</h3>
-            <p class="text-muted mb-0">...and clear sentences...</p>
+            <i class="fas fa-4x fa-eye-dropper text-primary mb-4"></i>
+            <h3 class="h4 mb-2">Load</h3>
+            <p class="text-muted mb-0">Insert the sample in the device opening</p>
           </div>
         </div>
         <div class="col-lg-3 col-md-6 text-center">
           <div class="mt-5">
-            <i class="fas fa-4x fa-heartbeat text-primary mb-4"></i>
-            <h3 class="h4 mb-2">Step three</h3>
-            <p class="text-muted mb-0">...to show how to use the device...</p>
+            <i class="fas fa-4x fa-clock text-primary mb-4"></i>
+            <h3 class="h4 mb-2">Wait</h3>
+            <p class="text-muted mb-0">The test takes 30 minutes to complete</p>
           </div>
         </div>
         <div class="col-lg-3 col-md-6 text-center">
           <div class="mt-5">
-            <i class="fas fa-4x fa-laptop-medical text-primary mb-4"></i>
-            <h3 class="h4 mb-2">Step four</h3>
-            <p class="text-muted mb-0">...run out of things to say</p>
+            <i class="fas fa-4x fa-file-medical-alt text-primary mb-4"></i>
+            <h3 class="h4 mb-2">Read</h3>
+            <p class="text-muted mb-0">Upload a picture to get detailed results and treatment plan</p>
           </div>
         </div>
       </div>
@@ -120,7 +118,7 @@
         <div class="col-lg-8 text-center">
           <h2 class="text-white mt-0">Get your test results</h2>
           <hr class="divider light my-4">
-          <p class="text-white-50 mb-4">Some text here? Maybe yes maybe no</p>
+          <p class="text-white-50 mb-4">If you have run your test as described in the instructions above, you can now read the result</p>
           <a class="btn btn-light btn-xl js-scroll-trigger" href="#results">See your result</a>
         </div>
       </div>
@@ -138,8 +136,84 @@
   <section class="page-section bg-dark text-white" id="science">
     <div class="container text-center">
       <h2 class="mb-4">Behind the Scenes</h2>
-      <p class="text-white-75 font-weight-light mb-5">Maybe here link to another page with detailed information about the science of the project, the modular design and references?</p>
-      <a class="btn btn-light btn-xl" href="https://startbootstrap.com/themes/creative/">Find out more!</a>
+      <p class="text-white-75 font-weight-light mb-5">How does the test work? What are its components? What is the science behind each of them?</p>
+      <button type="button" class="btn btn-light btn-xl" data-toggle="collapse" data-target="#sci-details">Find out more!</button>
+      
+      <!-- Collapsible section with details-->
+      <div id="sci-details" class="container text-center collapse">
+        <p class="text-white-75 font-weight-light my-5">
+            Carbapenem resistant enterobacteria (CRE) are a class of "superbugs", bacteria that developed resistance to antibiotics that make infections extremely hard to treat. Diagnosing these infections is a major challenge.
+            <br> The device has three different modules: first the blood is filtered to separate cells and other substances that could interfere with the test; then bacterial DNA associated with CRE infections is amplified into millions of copies; finally these copies are bound to a test line and detected with a dye</p>
+        
+        <div id="accordion">
+
+          <div class="card my-1">
+            <div class="card-header" data-toggle="collapse" data-target="#collapseOne">
+              <p class="text-dark m-0" >
+                What is CRE?
+              </p>
+            </div>
+            <div id="collapseOne" class="collapse show" data-parent="#accordion">
+              <div class="card-body">
+                <p class="text-dark font-weight-light m-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card my-1">
+            <div class="card-header collapsed" data-toggle="collapse" data-target="#collapseTwo">
+              <p class="text-dark m-0" >
+                Our device - overview
+              </p>
+            </div>
+            <div id="collapseTwo" class="collapse" data-parent="#accordion">
+              <div class="card-body">
+                <p class="text-dark font-weight-light m-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="card my-1">
+            <div class="card-header collapsed" data-toggle="collapse" data-target="#collapseThree">
+              <p class="text-dark m-0" >
+                Our device - blood filtration
+              </p>
+            </div>
+            <div id="collapseThree" class="collapse" data-parent="#accordion">
+              <div class="card-body">
+                <p class="text-dark font-weight-light m-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+              </div>
+            </div>
+          </div>
+            
+          <div class="card my-1">
+            <div class="card-header collapsed" data-toggle="collapse" data-target="#collapseFour">
+              <p class="text-dark m-0" >
+                Our device - DNA amplification
+              </p>
+            </div>
+            <div id="collapseFour" class="collapse" data-parent="#accordion">
+              <div class="card-body">
+                <p class="text-dark font-weight-light m-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+              </div>
+            </div>
+          </div>
+            
+          <div class="card my-1">
+            <div class="card-header collapsed" data-toggle="collapse" data-target="#collapseFive">
+              <p class="text-dark m-0" >
+                Our device - colorimetric detection
+              </p>
+            </div>
+            <div id="collapseFive" class="collapse" data-parent="#accordion">
+              <div class="card-body">
+                <p class="text-dark font-weight-light m-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>        
     </div>
   </section>
 
