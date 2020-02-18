@@ -1,33 +1,27 @@
-
 clear all;
-originalImage = imread("images/mock1.jpg");
-grayImage = rgb2gray(originalImage);
+%export the image and convert into a binary image
+origImg = imread("images/mock7.jpg");
+grayImg = rgb2gray(origImg);
+binImg = imbinarize(grayImg);
 
-binaryImage = imbinarize(grayImage);
+%extract region properties of each area
+stats = [regionprops(binImg); regionprops(not(binImg))];
 
-cc = bwconncomp(binaryImage);
-stats = regionprops(cc, grayImage, 'Area', 'BoundingBox');
-minArea = size(originalImage,1)*size(originalImage, 2)*0.001;
-idx = find([stats.Area] > minArea);
-labelImage = ismember(labelmatrix(cc), idx);
+%find squares in the image
+sqrs = getsqrs(stats, size(origImg,1)*size(origImg, 2)*0.001);
+
+%sort sqrs by the x position of their BoundingBox
+sqrs = sortsqrs(sqrs);
+
+%find the group of quares that matches the calibration pattern
+%should have similar centroid positions and be contained within each other
+sqrs = sqrspattern(sqrs);
 
 figure;
-imshowpair(binaryImage, originalImage, 'montage');
+imshow(origImg);
 hold on;
 
-squares = [];
-
-for n = 1:size(stats,1)
-    box = stats(n).BoundingBox;
-    w = box(3);
-    h = box(4);
-    x = box(1);
-    y = box(2);
-    
-    if w*h > minArea && round(w/h) == 1
-        rectangle('Position', [x y w h], 'EdgeColor', 'r');
-        squares = [squares [x y w h]];
-    end
+for n = 1:length(sqrs)
+    rectangle('Position', sqrs(n).BoundingBox, 'EdgeColor', 'r');
+    plot(sqrs(n).Centroid(1), sqrs(n).Centroid(2), 'g*');
 end
-
-
