@@ -1,6 +1,5 @@
-clear all;
 %export the image and convert into a binary image
-origImg = imread("images/mock7.jpg");
+origImg = imread("images/mock4.jpg");
 grayImg = rgb2gray(origImg);
 binImg = imbinarize(grayImg);
 
@@ -17,11 +16,20 @@ sqrs = sortsqrs(sqrs);
 %should have similar centroid positions and be contained within each other
 sqrs = sqrspattern(sqrs);
 
+%get the center of the pattern
+center_sqrs = get_center(sqrs);
+
+%show the identified squares on the original image
 figure;
 imshow(origImg);
 hold on;
 
 for n = 1:length(sqrs)
     rectangle('Position', sqrs(n).BoundingBox, 'EdgeColor', 'r');
-    plot(sqrs(n).Centroid(1), sqrs(n).Centroid(2), 'g*');
 end
+
+plot(center_sqrs(1), center_sqrs(2), 'g*');
+plot(sqrs(4).Centroid(1), sqrs(4).Centroid(2), 'g*');
+
+%measuring the angle of the line defined by the two centers in relation to
+%the x axis
