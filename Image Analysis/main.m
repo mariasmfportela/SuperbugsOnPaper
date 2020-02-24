@@ -16,10 +16,37 @@ sqrs = sortsqrs(sqrs);
 %should have similar centroid positions and be contained within each other
 sqrs = sqrspattern(sqrs);
 
-%get the center of the pattern
-center_sqrs = get_center(sqrs);
+%find a box that binds the actual square pattern
 
-%show the identified squares on the original image
+%get the center of the larger squares in the pattern, and the center of the
+%smaller square
+lg_center = get_center(sqrs);
+sm_center = [sqrs(4).Centroid(1) sqrs(4).Centroid(2)];
+
+%get the angle these make with vertical axis
+theta = get_angle(lg_center, sm_center);
+
+%
+if abs(theta) < 90
+    y = sqrs(4).BoundingBox(4);
+    b = lg_center(2) - sqrs(4).BoundingBox(2);
+    if b < y/2
+        x = sqrs(4).BoundingBox(3);
+        a = lg_center(1) - sqrs(4).BoundingBox(1);
+        alpha = atand((x-a)/a);
+    else
+        alpha = atand((y-b)/b);
+    end
+    
+
+
+%define unit distance as the side of the smaller pattern square
+unit = mean(sqrs(4).BoundingBox(3), sqrs(4).BoundingBox(4));
+
+%find control line
+%get_ctrl_line(origImg, lg_center, tau, unit);
+
+%plot findings
 figure;
 imshow(origImg);
 hold on;
@@ -28,8 +55,5 @@ for n = 1:length(sqrs)
     rectangle('Position', sqrs(n).BoundingBox, 'EdgeColor', 'r');
 end
 
-plot(center_sqrs(1), center_sqrs(2), 'g*');
-plot(sqrs(4).Centroid(1), sqrs(4).Centroid(2), 'g*');
-
-%measuring the angle of the line defined by the two centers in relation to
-%the x axis
+plot(lg_center(1), lg_center(2), 'g*');
+plot(sm_center(1), sm_center(2), 'g*');
