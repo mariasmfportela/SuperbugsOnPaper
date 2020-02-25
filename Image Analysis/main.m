@@ -16,35 +16,24 @@ sqrs = sortsqrs(sqrs);
 %should have similar centroid positions and be contained within each other
 sqrs = sqrspattern(sqrs);
 
-%find a box that binds the actual square pattern
+%an extra step will be needed here to correct for tilting of the image
+%right now it only works if the picture was taken with the camara parallel
+%to the strip, in a flat surface
 
 %get the center of the larger squares in the pattern, and the center of the
 %smaller square
 lg_center = get_center(sqrs);
 sm_center = [sqrs(4).Centroid(1) sqrs(4).Centroid(2)];
 
-%get the angle these make with vertical axis
+%get the direction from the larger center to the test lines
+%angle with the coordinate system as a value between -180 and 180 degrees
 theta = get_angle(lg_center, sm_center);
 
-%
-if abs(theta) < 90
-    y = sqrs(4).BoundingBox(4);
-    b = lg_center(2) - sqrs(4).BoundingBox(2);
-    if b < y/2
-        x = sqrs(4).BoundingBox(3);
-        a = lg_center(1) - sqrs(4).BoundingBox(1);
-        alpha = atand((x-a)/a);
-    else
-        alpha = atand((y-b)/b);
-    end
-    
+%get unit length, defined as side of smaller square
+unit = get_unit(sqrs(4).BoundingBox, theta, lg_center);
 
-
-%define unit distance as the side of the smaller pattern square
-unit = mean(sqrs(4).BoundingBox(3), sqrs(4).BoundingBox(4));
-
-%find control line
-%get_ctrl_line(origImg, lg_center, tau, unit);
+%find points that limit the control line - not working yet
+get_ctrl_line(origImg, lg_center, theta, unit);
 
 %plot findings
 figure;
@@ -57,3 +46,7 @@ end
 
 plot(lg_center(1), lg_center(2), 'g*');
 plot(sm_center(1), sm_center(2), 'g*');
+
+x = (lg_center(1)-100000):(lg_center(1)+10000);
+y = tand(theta)*x + lg_center(2)-tand(theta)*lg_center(1);
+plot(x,y,'b');
