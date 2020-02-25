@@ -1,22 +1,15 @@
-function output = get_ctrl_line(image, center, angle, unit)
-%define rotation matrix
-A = [cos(angle) -sin(angle); sin(angle) cos(angle)];
+function [p1, p2, p3, p4] = get_ctrl_line(img, center, angle, u)
+pivot = [(cos(angle)*4*u + center(1)) (sin(angle)*4*u + center(2))];
 
-%define original corner of the control line
-ul = [(center(1)-2.5*unit); (center(2)-4*unit)];
-ur = [(center(1)+2.5*unit); (center(2)-4*unit)];
-bl = [(center(1)-2.5*unit); (center(2)-3*unit)];
-br = [(center(1)+2.5*unit); (center(2)-3*unit)];
-
-%plot
 figure;
-imshow(imrotate(image,angle));
+imshow(img);
 hold on;
-plot(ul(1), ul(2), 'r*');
-plot(ur(1), ur(2), 'g*');
-plot(br(1), br(2), 'b*');
-plot(bl(1), bl(2), 'c*');
+plot(cos(angle)*4*u + center(1), sin(angle)*4*u + center(2), 'b*');
 
+p1 = pivot - [2.5*u*cos(angle+90) 2.5*u*sin(angle+90)];
+p2 = pivot + [2.5*u*cos(angle+90) 2.5*u*sin(angle+90)];
+p3 = p1 + [u*sin(angle+90) u*cos(angle+90)];
+p4 = p2 + [u*sin(angle+90) u*cos(angle+90)];
 
 end
 
