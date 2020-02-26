@@ -1,15 +1,13 @@
-function [p1, p2, p3, p4] = get_ctrl_line(img, center, angle, u)
-pivot = [(cos(angle)*4*u + center(1)) (sin(angle)*4*u + center(2))];
+function [p1, p2, p3, p4] = get_ctrl_line(img, origin, angle, u)
+%y = tand(theta)*x + lg_center(2)-tand(theta)*lg_center(1);
+%x = (y - lg_center(2) + tand(theta)*lg_center(1))/tand(theta);
+m1 = tand(angle);
+b1 = origin(2) - tand(angle)*origin(1);
 
-figure;
-imshow(img);
-hold on;
-plot(cos(angle)*4*u + center(1), sin(angle)*4*u + center(2), 'b*');
+m2 = -1/tand(angle);
+b2 = (origin(2)*sin(angle) + origin(1)*cos(angle) + 4*u)/(cos(angle)*sin(angle));
 
-p1 = pivot - [2.5*u*cos(angle+90) 2.5*u*sin(angle+90)];
-p2 = pivot + [2.5*u*cos(angle+90) 2.5*u*sin(angle+90)];
-p3 = p1 + [u*sin(angle+90) u*cos(angle+90)];
-p4 = p2 + [u*sin(angle+90) u*cos(angle+90)];
+%p1 = 
 
 end
 
