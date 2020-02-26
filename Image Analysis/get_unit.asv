@@ -6,16 +6,18 @@ if angle >= 90
     a = rect(1) - origin(1);
     b = tand(angle)*rect(1) + origin(2)-tand(angle)*origin(1) - origin(2);
 elseif angle >= 0
-    a = (rect(2) + rect(4) - origin(2) + tand(angle)*origin(1))/tand(angle) - origin(1);
-    b = rect(2) + rect(4) - origin(2);
+    a = rect(1) - origin(1);
+    b = tand(angle)*rect(1) + origin(2)-tand(angle)*origin(1) - origin(2);
 elseif angle >= -90
     a = rect(1) + rect(3) - origin(1);
     b = tand(angle)*(rect(1) + rect(3)) + origin(2)-tand(angle)*origin(1) - origin(2);
 else
-    a = (rect(2) - origin(2) + tand(angle)*origin(1))/tand(angle) - origin(1);
-    b = rect(2) - origin(2);
+    a = rect(1) + rect(3) - origin(1);
+    b = tand(angle)*(rect(1) + rect(3)) + origin(2)-tand(angle)*origin(1) - origin(2);
 end
 
+a = x - origin(1);
+b = = tand(angle)*x + origin(2)-tand(angle)*origin(1) - origin(2);
 unit = sqrt(a^2 + b^2);
 
 end

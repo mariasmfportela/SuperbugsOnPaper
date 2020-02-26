@@ -25,7 +25,7 @@ theta = theta + 45;
 
 %bound value between 180 and -180
 if theta > 180
-    theta = theta - 180;
+    theta = theta - 360;
 end
 
 end
