@@ -1,13 +1,9 @@
-function sqrs = get_sqrs_pattern(origImg)
-%convert image in binary matrix
-grayImg = rgb2gray(origImg);
-binImg = imbinarize(grayImg);
-
+function sqrs = get_sqrs_pattern(img)
 %extract region properties of each area
-stats = [regionprops(binImg); regionprops(not(binImg))];
+stats = [regionprops(img); regionprops(not(img))];
 
 %find squares in the image
-sqrs = getsqrs(stats, size(origImg,1)*size(origImg, 2)*0.001);
+sqrs = getsqrs(stats, size(img,1)*size(img, 2)*0.001);
 
 %sort sqrs by the x position of their BoundingBox
 sqrs = sortsqrs(sqrs);
