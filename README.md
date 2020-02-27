@@ -1,2 +1,5 @@
 # SuperbugsOnPaper
-Y2 Molecular Engineering Design Project
+MEng Molecular Bioengineering - Engineering Design Project
+Imperial College London 2019/20
+
+Molecular Group 2
