@@ -1,20 +1,8 @@
 %export the image and convert into a binary image
-origImg = imread("images/mock4.jpg");
-grayImg = rgb2gray(origImg);
-binImg = imbinarize(grayImg);
+origImg = imread("images/mock2.jpg");
 
-%extract region properties of each area
-stats = [regionprops(binImg); regionprops(not(binImg))];
-
-%find squares in the image
-sqrs = getsqrs(stats, size(origImg,1)*size(origImg, 2)*0.001);
-
-%sort sqrs by the x position of their BoundingBox
-sqrs = sortsqrs(sqrs);
-
-%find the group of quares that matches the calibration pattern
-%should have similar centroid positions and be contained within each other
-sqrs = sqrspattern(sqrs);
+%find the calibration pattern
+get_sqrs_pattern(origImg);
 
 %an extra step will be needed here to correct for tilting of the image
 %right now it only works if the picture was taken with the camara parallel
@@ -33,13 +21,9 @@ theta = get_angle(lg_center, sm_center);
 %get unit length, defined as side of smaller square
 unit = get_unit(sqrs(4).BoundingBox, theta, lg_center);
 
-%find points that limit the control line - not working yet
-get_ctrl_line(origImg, lg_center, theta, unit);
+%find if control line is present
+ctrl_line(origImg, lg_center, theta, unit);
 
-%plot findings
-figure;
-imshow(origImg);
-hold on;
 
 for n = 1:length(sqrs)
     rectangle('Position', sqrs(n).BoundingBox, 'EdgeColor', 'r');

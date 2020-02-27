@@ -16,6 +16,15 @@ else
     b = rect(2) - origin(2);
 end
 
+%ensure values are within reasonable bounds
+if abs(a) > rect(3)
+    a = rect(3);
+end
+
+if abs(b) > rect(4);
+    b = rect(4);
+end
+
 unit = sqrt(a^2 + b^2);
 
 end
