@@ -20,6 +20,7 @@ sqrs = sqrspattern(sqrs);
 %right now it only works if the picture was taken with the camara parallel
 %to the strip, in a flat surface
 
+
 %get the center of the larger squares in the pattern, and the center of the
 %smaller square
 lg_center = get_center(sqrs);
