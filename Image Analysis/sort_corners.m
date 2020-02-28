@@ -1,26 +1,40 @@
-function corners_out = sort_corners(corners_in)
-%sorts the struct sqrs by ascending order of the value x for the bounding
-%box, by insertion sort
+function output = sort_corners(corners_in, rect)
+%sorts the struct sqrs by angle in polar coordinates, about the center of
+%rect
+
+%pre-process data into required format
+x_in = corners_in.Location(:,1);
+y_in = corners_in.Location(:,2);
+
+x_in = x_in - rect(1);
+y_in = y_in - rect(2);
+
+%convert to polar coordinates
+[theta, rho] = cart2pol(x_in, y_in);
+
+%sort points by theta by insertion sort
 i = 2;
-while i <= length(corners_in)
-    x = corners_in.Location(i);
+while i <= length(theta)
+    t = theta(i);
+    r = rho(i);
     j = i - 1;
-    while j >= 1 && corners_in.Location(j, 1) > x(1)
-        corners_in.Location(j+1) = corners_in.Location(j);
+
+    while j >= 1 && theta(j) > t
+        theta(j+1) = theta(j);
+        rho(j+1) = rho(j);
         j = j - 1;
     end
     
-    if corners_in.Location(j, 1) == x(1)
-        while j >= 1 && corners_in.Location(j, 2) > x(2)
-            corners_in.Location(j+1) = corners_in.Location(j);
-            j = j - 1;
-        end
-    end
-    
-    corners_in.Location(j+1) = x;
+    theta(j+1) = t;
+    rho(j+1) = r;
     i = i + 1;
 end
 
-corners_out = corners_in;
+%convert back to the original coordinate system
+[x_out, y_out] = pol2cart(theta, rho);
+x_out = x_out + rect(1);
+y_out = y_out + rect(2);
+
+output = [x_out y_out];
 end
 

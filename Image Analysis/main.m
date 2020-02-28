@@ -1,5 +1,5 @@
 %export the image and convert into a binary image
-origImg = imread("images/mock4.jpg");
+origImg = imread("images/mock3.jpg");
 
 %convert image in binary matrix
 grayImg = rgb2gray(origImg);
@@ -11,8 +11,8 @@ sqrs = get_sqrs_pattern(binImg);
 %an extra step will be needed here to correct for tilting of the image
 %right now it only works if the picture was taken with the camara parallel
 %to the strip, in a flat surface
-correct_shear(binImg, sqrs(4).BoundingBox);
-% 
+get_all_corners(binImg, sqrs(4).BoundingBox);
+
 % %get the center of the larger squares in the pattern, and the center of the
 % %smaller square
 % lg_center = get_center(sqrs);
