@@ -22,7 +22,5 @@ for n = 1:4
     plot(corners(1,n), corners(2,n), 'b*');
 end
 
-
-
 end
 
