@@ -1,4 +1,4 @@
-function [corners, center] = get_points(binImg, rect)
+function corners = get_points(binImg, rect)
 %detect corner features
 features = detectMinEigenFeatures(binImg, 'ROI', rect);
 
@@ -26,11 +26,9 @@ candidates = sort_candidates(candidates);
 
 %get a better approximation of the real position of the corners by linear
 %fit to the points in between the detected corners
-corners = line_fit_to_corners([x_cand y_cand candidates(1:4,3)], [x_feat y_feat]);
+corners = line_fit_to_corners([x_cand y_cand candidates(1:4,3)], [x_feat y_feat], x0, y0);
+
+%convert to correct coordinate system
 corners = corners + [x0*ones(4,1) y0*ones(4,1)];
-
-%get center of square
-center = get_center_from_corners(corners);
-
 end
 

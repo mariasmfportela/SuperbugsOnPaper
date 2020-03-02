@@ -3,8 +3,8 @@ function output = ctrl_line(img, origin, angle, u)
 %the origin
 p1 = [3*u; 2.5*u];
 p2 = [3*u; -2.5*u];
-p3 = [4*u; 2.5*u];
-p4 = [4*u; -2.5*u];
+p3 = [3.9*u; 2.5*u];
+p4 = [3.9*u; -2.5*u];
 corners = [p1 p2 p3 p4];
 
 %rotation by angle

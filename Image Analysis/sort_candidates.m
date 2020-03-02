@@ -8,7 +8,7 @@ i = 2;
 while i <= length(rho)
     t = theta(i);
     r = rho(i);
-    n = index(i)
+    n = index(i);
     j = i - 1;
 
     while j >= 1 && rho(j) < r
@@ -24,7 +24,7 @@ while i <= length(rho)
     i = i + 1;
 end
 
-candidates_out = [theta rho index]
+candidates_out = [theta rho index];
 
 end
 

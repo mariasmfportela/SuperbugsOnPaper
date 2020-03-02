@@ -1,4 +1,4 @@
-function corners_out = line_fit_to_corners(corners_in, features)
+function corners_out = line_fit_to_corners(corners_in, features, x0, y0)
 cut_offs = corners_in(:,3);
 cut_offs = sort(cut_offs);
 
