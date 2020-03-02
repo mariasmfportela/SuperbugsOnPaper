@@ -1,4 +1,4 @@
-function output = sort_features(features_in, rect)
+function output = sort_features(features_in, origin)
 %sorts the struct sqrs by angle in polar coordinates, about the center of
 %rect
 
@@ -6,8 +6,8 @@ function output = sort_features(features_in, rect)
 x_in = features_in.Location(:,1);
 y_in = features_in.Location(:,2);
 
-x_in = x_in - rect(1);
-y_in = y_in - rect(2);
+x_in = x_in - origin(1);
+y_in = y_in - origin(2);
 
 %convert to polar coordinates
 [theta, rho] = cart2pol(x_in, y_in);
