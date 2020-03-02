@@ -1,16 +1,61 @@
-function sqrs = get_sqrs_pattern(img)
+function sqrs_out = get_sqrs_pattern(img)
+sqrs = [];
+sqrs_out = [];
+
 %extract region properties of each area
 stats = [regionprops(img); regionprops(not(img))];
 
-%find squares in the image
-sqrs = get_sqrs(stats, size(img,1)*size(img, 2)*0.001);
+%%%%%%%%%%%%%%%%%%%% find squares in the image %%%%%%%%%%%%%%%%%%%%
 
-%sort sqrs by the x position of their BoundingBox
-sqrs = sort_sqrs(sqrs);
+%minimum area for the square to be considered
+minArea = size(img,1)*size(img, 2)*0.001;
 
-%find the group of quares that matches the calibration pattern
+%extract squares of relevant size
+for n = 1:size(stats,1)
+    w = stats(n).BoundingBox(3);
+    h = stats(n).BoundingBox(4);
+    
+    tolerance = 0.1;
+    if w*h > minArea && w/h > 1-tolerance && w/h < 1+tolerance
+        %store each square as a column
+        sqrs = [sqrs stats(n)];
+    end
+end
+
+%%%%%%%%%% sort sqrs by the x position of their BoundingBox %%%%%%%%%%
+
+i = 2;
+while i <= length(sqrs)
+    x = sqrs(i);
+    j = i - 1;
+    while j >= 1 && sqrs(j).BoundingBox(1) > x.BoundingBox(1)
+        sqrs(j+1) = sqrs(j);
+        j = j - 1;
+    end
+    sqrs(j+1) = x;
+    i = i + 1;
+end
+
+%%%%%%%%%%%%%%%%%%%% find the calibration pattern %%%%%%%%%%%%%%%%%%%%
+
 %should have similar centroid positions and be contained within each other
-sqrs = sqrs_pattern(sqrs);
+for i = 1:length(sqrs)
+    if isempty(sqrs_out)
+        for j = (i+1):length(sqrs)
+            if closecentroid(sqrs(j), sqrs(i)) && isinside(sqrs(j), sqrs(i))
+                for k = (j+1):length(sqrs)
+                    if closecentroid(sqrs(k), sqrs(j)) && isinside(sqrs(k), sqrs(j))
+                        for l = (k+1):length(sqrs)
+                            if isinside(sqrs(l), sqrs(k))
+                                sqrs_out = [sqrs(i) sqrs(j) sqrs(k) sqrs(l)];
+                            end
+                        end
+                    end
+                end
+            end
+        end
+    end
+end
 
 end
 

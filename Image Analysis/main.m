@@ -27,10 +27,3 @@ center = get_center_from_corners(corners);
 theta = get_lines_direction(origin, center, corners, side);
 
 ctrl_line(origImg, origin, theta, side);
-
-plot(origin(1), origin(2), 'g*');
-plot(center(1), center(2), 'g*');
-
-x = (origin(1)-100000):(origin(1)+10000);
-y = tand(theta)*x + origin(2) - tand(theta)*origin(1);
-plot(x,y,'b');
