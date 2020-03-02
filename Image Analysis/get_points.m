@@ -1,8 +1,4 @@
 function [corners, center] = get_points(binImg, rect)
-figure;
-imshow(binImg);
-hold on;
-
 %detect corner features
 features = detectMinEigenFeatures(binImg, 'ROI', rect);
 
@@ -34,14 +30,7 @@ corners = line_fit_to_corners([x_cand y_cand candidates(1:4,3)], [x_feat y_feat]
 corners = corners + [x0*ones(4,1) y0*ones(4,1)];
 
 %get center of square
-center = get_Center_from_corners(corners);
-
-
-[x,y] = pol2cart(candidates(1:4,1), candidates(1:4,2));
-x = x + x0;
-y = y + y0;
-plot(corners(:,1), corners(:,2), 'r*');
-plot(x, y, 'g*');
+center = get_center_from_corners(corners);
 
 end
 
