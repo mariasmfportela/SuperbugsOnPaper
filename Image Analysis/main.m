@@ -1,35 +1,36 @@
 %export the image and convert into a binary image
-origImg = imread("images/mock4.jpg");
+origImg = imread("images/mock2.jpg");
+
+%convert image in binary matrix
 grayImg = rgb2gray(origImg);
 binImg = imbinarize(grayImg);
 
-%extract region properties of each area
-stats = [regionprops(binImg); regionprops(not(binImg))];
+%find the calibration pattern
+sqrs = get_sqrs_pattern(binImg);
 
-%find squares in the image
-sqrs = getsqrs(stats, size(origImg,1)*size(origImg, 2)*0.001);
+%get the corners of the smaller callibration square
+corners = get_points(binImg, sqrs(4).BoundingBox);
 
-%sort sqrs by the x position of their BoundingBox
-sqrs = sortsqrs(sqrs);
+%define origin as the corner closer to the center of the calibration
+%squares
+lg_center = get_center(sqrs);
+index_origin_corner = find_closest(corners, lg_center);
+origin = corners(index_origin_corner,:);
 
-%find the group of quares that matches the calibration pattern
-%should have similar centroid positions and be contained within each other
-sqrs = sqrspattern(sqrs);
+%get side length of smaller square
+side = get_side_length(corners);
 
-%get the center of the pattern
-center_sqrs = get_center(sqrs);
+%get center of smaller square
+center = get_center_from_corners(corners);
 
-%show the identified squares on the original image
-figure;
-imshow(origImg);
-hold on;
+%get direction from origin to test lines
+theta = get_lines_direction(origin, center, corners, side);
 
-for n = 1:length(sqrs)
-    rectangle('Position', sqrs(n).BoundingBox, 'EdgeColor', 'r');
-end
+ctrl_line(origImg, origin, theta, side);
 
-plot(center_sqrs(1), center_sqrs(2), 'g*');
-plot(sqrs(4).Centroid(1), sqrs(4).Centroid(2), 'g*');
+plot(origin(1), origin(2), 'g*');
+plot(center(1), center(2), 'g*');
 
-%measuring the angle of the line defined by the two centers in relation to
-%the x axis
+x = (origin(1)-100000):(origin(1)+10000);
+y = tand(theta)*x + origin(2) - tand(theta)*origin(1);
+plot(x,y,'b');
