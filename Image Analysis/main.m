@@ -11,17 +11,19 @@ sqrs = get_sqrs_pattern(binImg);
 %an extra step will be needed here to correct for tilting of the image
 %right now it only works if the picture was taken with the camara parallel
 %to the strip, in a flat surface
-get_all_corners(binImg, sqrs(4).BoundingBox);
+[corners, sm_center] = get_points(binImg, sqrs(4).BoundingBox);
 
-% %get the center of the larger squares in the pattern, and the center of the
-% %smaller square
-% lg_center = get_center(sqrs);
-% sm_center = [sqrs(4).Centroid(1) sqrs(4).Centroid(2)];
-% 
-% %get the direction from the larger center to the test lines
-% %angle with the coordinate system as a value between -180 and 180 degrees
-% theta = get_angle(lg_center, sm_center);
-% 
+%get the center of the larger squares in the pattern, and the center of the
+%smaller square
+lg_center = get_center(sqrs);
+
+%get the direction from the larger center to the test lines
+%angle with the coordinate system as a value between -180 and 180 degrees
+theta = get_angle(lg_center, sm_center);
+
+figure;
+imshow(origImg);
+
 % %get unit length, defined as side of smaller square
 % unit = get_unit(sqrs(4).BoundingBox, theta, lg_center);
 % 
