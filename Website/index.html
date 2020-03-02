@@ -131,6 +131,19 @@
           <div id="map" style="height: 100%; width: 100%"></div>
       </div>
   </section>
+  <body> 
+    <h3>Map Database</h3>
+    <div id="map"></div> 
+    <script> 
+      // Initialize and add the map
+      function initMap() {
+        // The location of Phnom Penh, capital of Cambodia 
+        var phnom = {lat: 11.5564, lng: 104.9282};
+        var map = new google.maps.Map(
+          document.getElementById('map'), {zoom: 4, center: phnom});
+        // Marker positioned at Phnom Penh
+        var marker = new google.maps.Marker({position: phnom, map: map});
+        
 
   <!-- Science Section -->
   <section class="page-section bg-dark text-white" id="science">
