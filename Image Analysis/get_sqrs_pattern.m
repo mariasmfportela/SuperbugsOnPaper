@@ -1,6 +1,6 @@
-function sqrs_out = get_sqrs_pattern(img)
+function [sqrs, sqrs_pattern] = get_sqrs_pattern(img)
 sqrs = [];
-sqrs_out = [];
+sqrs_pattern = [];
 
 %extract region properties of each area
 stats = [regionprops(img); regionprops(not(img))];
@@ -22,6 +22,11 @@ for n = 1:size(stats,1)
     end
 end
 
+% %plot to check
+% for n = 1:length(sqrs)
+%     rectangle('Position', sqrs(n).BoundingBox);
+% end
+
 %%%%%%%%%% sort sqrs by the x position of their BoundingBox %%%%%%%%%%
 
 i = 2;
@@ -40,14 +45,14 @@ end
 
 %should have similar centroid positions and be contained within each other
 for i = 1:length(sqrs)
-    if isempty(sqrs_out)
+    if isempty(sqrs_pattern)
         for j = (i+1):length(sqrs)
             if closecentroid(sqrs(j), sqrs(i)) && isinside(sqrs(j), sqrs(i))
                 for k = (j+1):length(sqrs)
                     if closecentroid(sqrs(k), sqrs(j)) && isinside(sqrs(k), sqrs(j))
                         for l = (k+1):length(sqrs)
                             if isinside(sqrs(l), sqrs(k))
-                                sqrs_out = [sqrs(i) sqrs(j) sqrs(k) sqrs(l)];
+                                sqrs_pattern = [sqrs(i) sqrs(j) sqrs(k) sqrs(l)];
                             end
                         end
                     end

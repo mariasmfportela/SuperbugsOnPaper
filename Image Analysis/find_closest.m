@@ -1,5 +1,6 @@
 function index = find_closest(points, target)
 %outputs the index of the point in points closer to target
+%each point is a row [x y]
 
 min = 10000;
 index = 0; %store index of corner closer to origin
