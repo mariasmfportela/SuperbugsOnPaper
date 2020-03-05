@@ -2,8 +2,10 @@ function [sqrs, sqrs_pattern] = get_sqrs_pattern(img)
 sqrs = [];
 sqrs_pattern = [];
 
+binImg = binary_image(img);
+
 %extract region properties of each area
-stats = [regionprops(img); regionprops(not(img))];
+stats = [regionprops(binImg); regionprops(not(binImg))];
 
 %%%%%%%%%%%%%%%%%%%% find squares in the image %%%%%%%%%%%%%%%%%%%%
 

@@ -1,6 +1,9 @@
-function corners = get_points(binImg, rect)
+function corners = get_points(img, rect)
+binImg = binary_image(img);
+
 %detect corner features
 features = detectMinEigenFeatures(binImg, 'ROI', rect);
+plot(features.Location(:,1), features.Location(:,2), 'y*');
 
 %define origin
 x0 = rect(1) + rect(3)/2;
@@ -15,14 +18,15 @@ rho = [features_polar(:,2); features_polar(1,2)];
 %corners of the square will have biggest rho values
 candidates = [];
 for n = 2:length(rho)-1
-    if rho(n)-rho(n-1) > 0 && rho(n)-rho(n+1) > 0
-        candidates = [candidates; theta(n) rho(n) n]; 
+    if rho(n) > rho(n-1) && rho(n) > rho(n+1)
+        candidates = [candidates; theta(n) rho(n) n];
     end
 end
 
 %after sorting, the corners are the first four values
 candidates = sort_candidates(candidates);
 [x_cand, y_cand] = pol2cart(candidates(1:4,1), candidates(1:4,2));
+plot(x_cand + x0, y_cand + y0, 'm*');
 
 %get a better approximation of the real position of the corners by linear
 %fit to the points in between the detected corners
