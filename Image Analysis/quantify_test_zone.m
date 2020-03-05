@@ -1,16 +1,4 @@
-function output = quantify_test_zone(img, origin, angle, vertices)
-%quantify green channel of image; vertices are the positions of the corners
-%of the test zone with rotation angle 0
-
-%rotate
-vertices = vertices*[cosd(angle) sind(angle); -sind(angle) cosd(angle)];
-
-%translation
-vertices = vertices + [origin(1)*ones(4, 1) origin(2)*ones(4,1)];
-
-% %plot vertices to check
-% plot(vertices(1,:), vertices(2,:), 'r*');
-
+function output = quantify_test_zone(img, vertices)
 %create mask for the region of interest
 x = double(vertices(:,1));
 y = double(vertices(:,2));

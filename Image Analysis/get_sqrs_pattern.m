@@ -15,17 +15,12 @@ for n = 1:size(stats,1)
     w = stats(n).BoundingBox(3);
     h = stats(n).BoundingBox(4);
     
-    tolerance = 0.1;
+    tolerance = 0.2;
     if w*h > minArea && w/h > 1-tolerance && w/h < 1+tolerance
         %store each square as a column
         sqrs = [sqrs stats(n)];
     end
 end
-
-% %plot to check
-% for n = 1:length(sqrs)
-%     rectangle('Position', sqrs(n).BoundingBox);
-% end
 
 %%%%%%%%%% sort sqrs by the x position of their BoundingBox %%%%%%%%%%
 
