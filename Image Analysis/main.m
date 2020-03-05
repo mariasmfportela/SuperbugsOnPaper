@@ -1,5 +1,6 @@
+tic;
 %export the image and convert into a binary image
-origImg = imread("images/mock2.jpg");
+origImg = imread("images/mock9.jpg");
 
 %convert image in binary matrix
 grayImg = rgb2gray(origImg);
@@ -40,3 +41,4 @@ if ctrl_line(origImg, origin, theta, side)
     test_lines(origImg, origin, theta, side, sqrs);
     valid = true;
 end
+toc;

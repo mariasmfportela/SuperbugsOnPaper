@@ -1,32 +1,35 @@
 function results = test_lines(img, origin, angle, u, sqrs)
+d = [6.5*u 8*u 9.5*u];
 
-d = [6*u 7.5*u 9*u];
+%define line from origin to predicted position of control spots
 x = d*cosd(angle) + origin(1);
 y = d*sind(angle) + origin(2);
 
-test_points = [];
+%choose the points to be tested
+test_points = zeros(length(sqrs), 2);
 for n = 1:length(sqrs)
-    test_points = [test_points; sqrs(n).Centroid(1) sqrs(n).Centroid(2)];
+    if sqrs(n).BoundingBox(3) < 2*u
+        test_points(n,:) = [sqrs(n).Centroid(1) sqrs(n).Centroid(2)];
+        %plot(sqrs(n).Centroid(1), sqrs(n).Centroid(2), 'g*');
+    end
 end
+%test_points(test_points == 0) = [];
 
-a = find_closest(test_points, [x(1) y(1)]);
-plot(sqrs(a).Centroid(1), sqrs(a).Centroid(2), 'b*');
-plot(x, y, 'r*');
+%select the points closest to the predicted position of control spots
+a = find_closest(test_points, [x.' y.']);
+
+%for each test line, quantify control spot and test spots
+results = zeros(1,3);
+for n = 1:3
+    corners = get_points(imbinarize(rgb2gray(img)), sqrs(a(n)).BoundingBox);
+    center = get_center_from_corners(corners);
     
-
-
-% %%%%%%%%%%%%%%%%%%%% coordinates of each test zone %%%%%%%%%%%%%%%%%%%%
-% %line 1 ctrl
-% L1_ctrl = [5.8*u 5.8*u 6.7*u 6.7*u; -0.5*u 0.5*u 0.5*u -0.5*u];
-% 
-% L2_ctrl = [7.3*u 7.3*u 8.2*u 8.2*u; -0.5*u 0.5*u 0.5*u -0.5*u];
-% 
-% L3_ctrl = [8.8*u 8.8*u 9.7*u 9.7*u; -0.5*u 0.5*u 0.5*u -0.5*u];
-% 
-% quantify_test_zone(img, origin, angle, L1_ctrl);
-% quantify_test_zone(img, origin, angle, L2_ctrl);
-% quantify_test_zone(img, origin, angle, L3_ctrl);
-
+    plot(corners(:,1), corners(:,2), 'r*');
+    ctrl = quantify_test_zone(img, corners);
+    test = test_zones(img, center, angle, u);
+    
+    results(n) = test/ctrl;
+end
 
 end
 
