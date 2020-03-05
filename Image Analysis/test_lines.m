@@ -13,16 +13,21 @@ for n = 1:length(sqrs)
         %plot(sqrs(n).Centroid(1), sqrs(n).Centroid(2), 'g*');
     end
 end
-%test_points(test_points == 0) = [];
 
 %select the points closest to the predicted position of control spots
 a = find_closest(test_points, [x.' y.']);
 
+%imshow(binary_image(img));
+
 %for each test line, quantify control spot and test spots
 results = zeros(1,3);
 for n = 1:3
-    corners = get_points(imbinarize(rgb2gray(img)), sqrs(a(n)).BoundingBox);
+    figure;
+    imshow(img);
+    hold on;
+    corners = get_points(img, sqrs(a(n)).BoundingBox);
     center = get_center_from_corners(corners);
+    plot(center(1), center(2), 'g*');
     
     plot(corners(:,1), corners(:,2), 'r*');
     ctrl = quantify_test_zone(img, corners);

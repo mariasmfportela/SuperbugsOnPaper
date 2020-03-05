@@ -1,21 +1,21 @@
 tic;
 %export the image and convert into a binary image
-origImg = imread("images/mock9.jpg");
-
-%convert image in binary matrix
-grayImg = rgb2gray(origImg);
-binImg = imbinarize(grayImg);
+img = imread("images/mock3.jpg");
 
 %plot identified vertices
 figure;
-imshow(origImg);
+imshow(img);
 hold on;
 
 %find the calibration pattern
-[sqrs, sqrs_pattern] = get_sqrs_pattern(binImg);
+[sqrs, sqrs_pattern] = get_sqrs_pattern(img);
+% 
+% for n = 1:length(sqrs)
+%     rectangle('Position', sqrs(n).BoundingBox, 'EdgeColor', 'r');
+% end
 
 %get the corners of the smaller square in pattern
-ptrn_sm_corners = get_points(binImg, sqrs_pattern(4).BoundingBox);
+ptrn_sm_corners = get_points(img, sqrs_pattern(4).BoundingBox);
 
 %define origin as the corner closer to the center of the pattern squares
 ptrn_lg_center = get_center(sqrs_pattern);
@@ -37,8 +37,8 @@ results = zeros(3);
 valid = false;
 
 %verify if control line is present
-if ctrl_line(origImg, origin, theta, side)
-    test_lines(origImg, origin, theta, side, sqrs);
+if ctrl_line(img, origin, theta, side)
+    test_lines(img, origin, theta, side, sqrs);
     valid = true;
 end
 toc;
