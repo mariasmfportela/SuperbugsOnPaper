@@ -10,7 +10,6 @@ test_points = zeros(length(sqrs), 2);
 for n = 1:length(sqrs)
     if sqrs(n).BoundingBox(3) < 2*u
         test_points(n,:) = [sqrs(n).Centroid(1) sqrs(n).Centroid(2)];
-        %plot(sqrs(n).Centroid(1), sqrs(n).Centroid(2), 'g*');
     end
 end
 
@@ -22,12 +21,8 @@ a = find_closest(test_points, [x.' y.']);
 %for each test line, quantify control spot and test spots
 results = zeros(1,3);
 for n = 1:3
-    figure;
-    imshow(img);
-    hold on;
     corners = get_points(img, sqrs(a(n)).BoundingBox);
     center = get_center_from_corners(corners);
-    plot(center(1), center(2), 'g*');
     
     plot(corners(:,1), corners(:,2), 'r*');
     ctrl = quantify_test_zone(img, corners);

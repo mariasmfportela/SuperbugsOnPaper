@@ -1,6 +1,6 @@
 tic;
 %export the image and convert into a binary image
-img = imread("images/mock3.jpg");
+img = imread("images/mock1.jpg");
 
 %plot identified vertices
 figure;
@@ -9,10 +9,6 @@ hold on;
 
 %find the calibration pattern
 [sqrs, sqrs_pattern] = get_sqrs_pattern(img);
-% 
-% for n = 1:length(sqrs)
-%     rectangle('Position', sqrs(n).BoundingBox, 'EdgeColor', 'r');
-% end
 
 %get the corners of the smaller square in pattern
 ptrn_sm_corners = get_points(img, sqrs_pattern(4).BoundingBox);
