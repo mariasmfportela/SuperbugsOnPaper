@@ -1,7 +1,7 @@
 function mean = test_zones(img, center, angle, u)
     %define the test zones
-    test_zone1 = [-0.5*u u; -0.5*u 2*u; 0.5*u 2*u; 0.5*u u];
-    test_zone2 = [-0.5*u -u; -0.5*u -2*u; 0.5*u -2*u; 0.5*u -u];
+    test_zone1 = [-0.5*u u; -0.5*u 2.5*u; 0.5*u 2.5*u; 0.5*u u];
+    test_zone2 = [-0.5*u -u; -0.5*u -2.5*u; 0.5*u -2.5*u; 0.5*u -u];
     
     %rotate
     test_zone1 = test_zone1*[cosd(angle) sind(angle); -sind(angle) cosd(angle)];
