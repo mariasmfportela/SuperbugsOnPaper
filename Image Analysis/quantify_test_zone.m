@@ -6,11 +6,11 @@ m = size(img,1);
 n = size(img,2);
 roi = poly2mask(x,y,m,n);
 
-%apply mask to image
-img(repmat(roi,[1,1,3])==0) = 0;
+%extract green channel
+img = img(:,:,2);
 
-%extract green channel of masked image
-green = img(:,:,2);
+%apply mask to green channel
+green = img.*uint8(roi);
 
 %exclude null values from array
 green(green == 0) = [];
