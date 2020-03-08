@@ -1,5 +1,5 @@
 %export the image and convert into a binary image
-img = imread("images/mock10.jpg");
+img = imread("images/mock4.jpg");
 
 %plot identified vertices
 figure;

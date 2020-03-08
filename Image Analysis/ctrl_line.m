@@ -9,7 +9,7 @@ vertices = vertices*[cosd(angle) sind(angle); -sind(angle) cosd(angle)];
 vertices = vertices + [origin(1)*ones(4, 1) origin(2)*ones(4,1)];
 
 %color intensity of control line
-plot(vertices(:,1), vertices(:,2), 'r*');
+%plot(vertices(:,1), vertices(:,2), 'r*');
 color = quantify_test_zone(img, vertices);
 
 %threshold for valid control
