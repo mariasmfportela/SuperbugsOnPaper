@@ -1,6 +1,5 @@
-tic;
 %export the image and convert into a binary image
-img = imread("images/mock1.jpg");
+img = imread("images/mock10.jpg");
 
 %plot identified vertices
 figure;
@@ -34,7 +33,6 @@ valid = false;
 
 %verify if control line is present
 if ctrl_line(img, origin, theta, side)
-    test_lines(img, origin, theta, side, sqrs);
+    results = test_lines(img, origin, theta, side, sqrs);
     valid = true;
 end
-toc;

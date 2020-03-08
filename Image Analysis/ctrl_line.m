@@ -13,9 +13,9 @@ plot(vertices(:,1), vertices(:,2), 'r*');
 color = quantify_test_zone(img, vertices);
 
 %threshold for valid control
-threshold = 50;
+threshold = 200;
 
-if color > threshold
+if color < threshold
     output = true;
 else
     output = false;
