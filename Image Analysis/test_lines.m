@@ -24,7 +24,7 @@ for n = 1:3
     corners = get_points(img, sqrs(a(n)).BoundingBox);
     center = get_center_from_corners(corners);
     
-    plot(corners(:,1), corners(:,2), 'r*');
+    %plot(corners(:,1), corners(:,2), 'r*');
     ctrl = quantify_test_zone(img, corners);
     test = test_zones(img, center, angle, u);
     

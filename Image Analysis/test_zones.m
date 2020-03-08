@@ -11,8 +11,8 @@ function mean = test_zones(img, center, angle, u)
     test_zone1 = test_zone1 + [center(1)*ones(4, 1) center(2)*ones(4,1)];
     test_zone2 = test_zone2 + [center(1)*ones(4, 1) center(2)*ones(4,1)];
     
-    plot(test_zone1(:,1), test_zone1(:,2), 'b*');
-    plot(test_zone2(:,1), test_zone2(:,2), 'b*');
+    %plot(test_zone1(:,1), test_zone1(:,2), 'b*');
+    %plot(test_zone2(:,1), test_zone2(:,2), 'b*');
     
     %quantify
     test1 = quantify_test_zone(img, test_zone1);
