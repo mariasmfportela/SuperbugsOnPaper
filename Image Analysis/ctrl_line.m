@@ -1,25 +1,24 @@
 function output = ctrl_line(img, origin, angle, u)
-%coordinates of the corners of the control line when angle = 0, relative to
-%the origin
-p1 = [3*u; 2.5*u];
-p2 = [3*u; -2.5*u];
-p3 = [3.9*u; 2.5*u];
-p4 = [3.9*u; -2.5*u];
-corners = [p1 p2 p3 p4];
+%coordinates of control line
+vertices = [3*u -2.5*u; 3*u 2.5*u; 3.8*u 2.5*u; 3.8*u -2.5*u];
 
-%rotation by angle
-corners = [cosd(angle) -sind(angle); sind(angle) cosd(angle)]*corners;
+%rotate
+vertices = vertices*[cosd(angle) sind(angle); -sind(angle) cosd(angle)];
 
-%translation to center at origin
-corners = corners + [origin.' origin.' origin.' origin.'];
+%translation
+vertices = vertices + [origin(1)*ones(4, 1) origin(2)*ones(4,1)];
 
-%plot to check
-figure;
-imshow(img);
-hold on;
+%color intensity of control line
+%plot(vertices(:,1), vertices(:,2), 'r*');
+color = quantify_test_zone(img, vertices);
 
-for n = 1:4
-    plot(corners(1,n), corners(2,n), 'b*');
+%threshold for valid control
+threshold = 200;
+
+if color < threshold
+    output = true;
+else
+    output = false;
 end
 
 end

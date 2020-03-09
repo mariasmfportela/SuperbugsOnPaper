@@ -16,7 +16,7 @@ theta = get_angle(origin, corners(n,:));
 %bound value between 180 and -180
 if theta > 180
     theta = theta - 360;
-else if theta < 180
+else if theta < -180
     theta = theta + 360;
 end
 
