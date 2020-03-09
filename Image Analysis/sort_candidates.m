@@ -1,4 +1,4 @@
-function candidates_out = sort_candidates(candidates_in)
+function candidates_out = select_candidates(candidates_in)
 theta = candidates_in(:,1);
 rho = candidates_in(:,2);
 index = candidates_in(:,3);
