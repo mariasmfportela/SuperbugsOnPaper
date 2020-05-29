@@ -1,5 +1,4 @@
 function output = result_analysis(img_name)
-tic;
 %function that takes img_name as a string for the path and file name of the
 %image to analyse and returns if the test is valid (ie, if the control line
 %is present) as well as a numerical result for the ratio of green
@@ -43,6 +42,6 @@ end
 %output as a vector with 4 values: the first represents if the test is
 %valid (boolean), and the three next values the result for each test line
 output = [valid results];
-toc;
+
 end
 
