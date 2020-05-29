@@ -1,12 +1,14 @@
-%export the image and convert into a binary image
-img = imread("images/mock4.jpg");
+function [valid, results] = result_analysis(img_name)
+%function that takes img_name as a string for the path and file name of the
+%image to analyse and returns if the test is valid (ie, if the control line
+%is present) as well as a numerical result for the ratio of green
+%channel values of the test zones to the control zones, for each test line
 
-%plot identified vertices
-figure;
-imshow(img);
-hold on;
+%import the image
+img = imread(img_name);
 
-%find the calibration pattern
+%find the calibration pattern as a set of square box with the desired
+%geometric relations
 [sqrs, sqrs_pattern] = get_sqrs_pattern(img);
 
 %get the corners of the smaller square in pattern
@@ -36,3 +38,6 @@ if ctrl_line(img, origin, theta, side)
     results = test_lines(img, origin, theta, side, sqrs);
     valid = true;
 end
+
+end
+
