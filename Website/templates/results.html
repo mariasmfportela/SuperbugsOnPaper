@@ -118,12 +118,7 @@
         <div class="col-lg-8 text-center">
           <h2 class="text-white mt-0">Get your test results</h2>
           <hr class="divider light my-4">
-          <p class="text-white-50 mb-4">If you have run your test as described in the instructions above, you can now read the result</p>
-          <form action="/results" method="POST">
-            <label for="resultPicture" class="text-white-50 mb-4">Select a file:</label>
-            <input type="file" class="btn btn-light btn-sm" id="resultPicture" name="user_result" accept="image/*" required><br><br>
-            <input type="submit" class="btn btn-light btn-xl" value="Get results">
-          </form>
+          <p class="text-white-50 mb-4">Result was: {{result}}</p>
         </div>
       </div>
     </div>

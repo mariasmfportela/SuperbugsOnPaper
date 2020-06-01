@@ -24,8 +24,5 @@ green = green(floor(0.1*length(green)):ceil(0.9*length(green)));
 
 %get mean green intensity in the region of interest
 output = mean(green);
-
-text(mean(x)-200, mean(y), num2str(output),'FontSize', 8, 'BackgroundColor', [1 1 0 0.5], 'Margin', 1);
-
 end
 
