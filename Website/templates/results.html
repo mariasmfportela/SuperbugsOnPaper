@@ -11,17 +11,17 @@
   <title>Superbugs On Paper</title>
 
   <!-- Font Awesome Icons -->
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet">
   <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
 
   <!-- Plugin CSS -->
-  <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+  <link href="static/vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
 
   <!-- Theme CSS - Includes Bootstrap -->
-  <link href="css/creative.css" rel="stylesheet">
+  <link href="static/css/creative.css" rel="stylesheet">
 
 
 </head>
@@ -111,14 +111,20 @@
     </div>
   </section>
 
-  <!-- Results Section -->
+   <!-- Results Section -->
   <section class="page-section bg-primary" id="results">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-lg-8 text-center">
           <h2 class="text-white mt-0">Get your test results</h2>
           <hr class="divider light my-4">
-          <p class="text-white-50 mb-4">Result was: {{result}}</p>
+          <p class="text-white-50 mb-0">Result was: {{result}}</p>
+          <img alt="Picture of the device submitted" class="text-white-50 mb-4" src="{{image_source}}"
+               style="transform:rotate(90deg); width:100%; height: auto; max-width: 25%;
+               margin-left: auto; margin-right: auto; display: block;">
+          <form method="POST">
+            <input type="submit" class="btn btn-light btn-xl" value="See another result">
+          </form>
         </div>
       </div>
     </div>
@@ -126,19 +132,18 @@
 
   <!-- Map Section -->
   <section class="page-section" id="map">
-      <div class="container">
-	<div class="row justify-content-center">
-          <div class="col-lg-8 text-center">
-            <h2 class="text-center mt-0">Global monitoring</h2>
-            <hr class="divider light my-4">
-	    <h3 class="h4 mb-2"> Coming soon... </h3>
-            <p class="text-muted mb-0">This map will show the locations where infections were detected</p>
-          </div>
-         </div>
-           <div style="height: 100%; width: 100%"></div>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 text-center">
+          <h2 class="text-center mt-0">Global monitoring</h2>
+          <hr class="divider light my-4">
+          <h3 class="h4 mb-2"> Coming soon... </h3>
+          <p class="text-muted mb-0">This map will show the locations where infections were detected</p>
         </div>
+      </div>
+    </div>
   </section>
-        
+
 
   <!-- Science Section -->
   <section class="page-section bg-dark text-white" id="science">
@@ -311,19 +316,21 @@
   </footer>
 
   <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="static/vendor/jquery/jquery.min.js"></script>
+  <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Plugin JavaScript -->
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-  <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+  <script src="static/vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="static/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
 
   <!-- Custom scripts for this template -->
-  <script src="js/creative.min.js"></script>
+  <script src="static/js/creative.min.js"></script>
 
-  <!-- Google Maps scripts -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoa-tpIpdpmJjTaw4M8JaKpiut1GvhrN4&callback=initMap" async defer></script>
-  <script src="js/maps.js"></script>
+{% if scroll %}
+<script>
+    document.getElementById('{{ scroll }}').scrollIntoView();
+</script>
+{% endif %}
 
 </body>
 

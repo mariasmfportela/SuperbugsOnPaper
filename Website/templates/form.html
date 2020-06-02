@@ -11,17 +11,17 @@
   <title>Superbugs On Paper</title>
 
   <!-- Font Awesome Icons -->
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet">
   <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
 
   <!-- Plugin CSS -->
-  <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+  <link href="static/vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
 
   <!-- Theme CSS - Includes Bootstrap -->
-  <link href="css/creative.css" rel="stylesheet">
+  <link href="static/css/creative.css" rel="stylesheet">
 
 
 </head>
@@ -119,9 +119,10 @@
           <h2 class="text-white mt-0">Get your test results</h2>
           <hr class="divider light my-4">
           <p class="text-white-50 mb-4">If you have run your test as described in the instructions above, you can now read the result</p>
-          <form action="/results" method="POST">
+          <p class="text-white-50 mb-4">It may take up to one minute to analyse your test</p>
+          <form method="POST" enctype="multipart/form-data">
             <label for="resultPicture" class="text-white-50 mb-4">Select a file:</label>
-            <input type="file" class="btn btn-light btn-sm" id="resultPicture" name="user_result" accept="image/*" required><br><br>
+            <input type="file" class="btn btn-light btn-sm" id="resultPicture" name="file" accept="image/*" required><br><br>
             <input type="submit" class="btn btn-light btn-xl" value="Get results">
           </form>
         </div>
@@ -316,19 +317,22 @@
   </footer>
 
   <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="static/vendor/jquery/jquery.min.js"></script>
+  <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Plugin JavaScript -->
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-  <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+  <script src="static/vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="static/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
 
   <!-- Custom scripts for this template -->
-  <script src="js/creative.min.js"></script>
+  <script src="static/js/creative.min.js"></script>
 
-  <!-- Google Maps scripts -->
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoa-tpIpdpmJjTaw4M8JaKpiut1GvhrN4&callback=initMap" async defer></script>
-  <script src="js/maps.js"></script>
+  <!-- Scroll to appropriate place at startup -->
+  {% if scroll %}
+  <script>
+      document.getElementById('{{ scroll }}').scrollIntoView();
+  </script>
+  {% endif %}
 
 </body>
 

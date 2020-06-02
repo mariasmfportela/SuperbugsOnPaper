@@ -4,6 +4,7 @@ from distutils.core import setup
 from distutils.command.clean import clean
 from distutils.command.install import install
 
+
 class InstallRuntime(install):
     # Calls the default run command, then deletes the build area 
     # (equivalent to "setup clean --all").
