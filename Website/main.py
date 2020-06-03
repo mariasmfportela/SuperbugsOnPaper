@@ -19,6 +19,11 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
 
 @app.route('/', methods=['GET', 'POST'])
+def show_form():
+    return render_template('form.html')
+
+
+@app.route('/result', methods=['POST'])
 def upload_file():
     if request.method == 'POST':
         # check if the post request has the file part
@@ -38,31 +43,34 @@ def upload_file():
             analysis = r.result_analysis(path_to_image)
             return render_template("results.html", result=parse_result(analysis), scroll="results",
                                    image_source=path_to_image)
-    return render_template('form.html')
+    return redirect(request.url)
 
 
 if __name__ == "__main__":
-    app.debug = True
     app.run()
 
 
+# verify if file submitted is of an allowed type
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
+# parse result array into human-readable text
 def parse_result(result):
     valid = result[0][0]
     kpc = result[0][1]
     oxa = result[0][2]
     ndm = result[0][3]
     if valid == 1:
-        return "The test is valid. The result for KPC is " + test_value(kpc) + ". The result for OXA is " + test_value(oxa) + ". The result for NDM is " + test_value(ndm) + "."
+        return "The test is valid. The result for KPC is " + test_value(kpc) + ". The result for OXA is " + test_value(
+            oxa) + ". The result for NDM is " + test_value(ndm) + "."
     return "The test was invalid"
 
 
+# interpret test value
 def test_value(value):
     tolerance = 0.1
-    if 1-tolerance < value < 1+tolerance:
+    if 1 - tolerance < value < 1 + tolerance:
         return "positive"
     return "negative"
