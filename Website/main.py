@@ -4,15 +4,18 @@ Created on Tue Mar 10 14:19:03 2020
 
 @author: maria
 """
+# python module imports
 import os
 import resultanalysis
 from flask import Flask, flash, url_for, render_template, request, redirect, send_from_directory
 from werkzeug.utils import secure_filename
 
+# variables setup
 UPLOAD_FOLDER = './static/user_files'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 r = resultanalysis.initialize()
 
+# flask framework setup
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
@@ -20,6 +23,11 @@ app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024
 
 @app.route('/', methods=['GET', 'POST'])
 def show_form():
+    # clean the user_files directory
+    for root, dir, files in os.walk(UPLOAD_FOLDER):
+        for f in files:
+            os.remove(os.path.join(root, f))
+    # render form template
     return render_template('form.html')
 
 
@@ -37,10 +45,14 @@ def upload_file():
             flash('No selected file')
             return redirect(request.url)
         if file and allowed_file(file.filename):
+            # ensure filename is secure to avoid attacks to the server
             filename = secure_filename(file.filename)
+            # save uploaded image on directory
             path_to_image = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             file.save(path_to_image)
+            # run image analysis script
             analysis = r.result_analysis(path_to_image)
+            # render the results page
             return render_template("results.html", result=parse_result(analysis), scroll="results",
                                    image_source=path_to_image)
     return redirect(request.url)
@@ -68,7 +80,7 @@ def parse_result(result):
     return "The test was invalid"
 
 
-# interpret test value
+# interpret test value (will need re-calibrating for final device)
 def test_value(value):
     tolerance = 0.1
     if 1 - tolerance < value < 1 + tolerance:
