@@ -2,26 +2,26 @@
 <html lang="en">
 
 <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Superbugs on Paper</title>
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-
-  <title>Superbugs On Paper</title>
-
-  <!-- Font Awesome Icons -->
-  <link href="static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet">
-  <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
-
-  <!-- Plugin CSS -->
-  <link href="static/vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
-
-  <!-- Theme CSS - Includes Bootstrap -->
-  <link href="static/css/creative.css" rel="stylesheet">
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css" />
+    <!-- Third party plugin CSS-->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="static/css/styles.css" rel="stylesheet" />
+    <!-- Bing Maps scripts -->
+    <script type="text/javascript" src="static/js/map.js"></script>
+    <script type='text/javascript' src='http://www.bing.com/api/maps/mapcontrol?callback=GetMap&key=AsrBS8qpJvnE6tmo9JHh4vwTEQDKi0-CgH15IVV0XwV2tI_RfvJzfxTkpm7aF2ZF'async defer></script>
 
 </head>
 
@@ -131,17 +131,17 @@
 
   <!-- Map Section -->
   <section class="page-section" id="map">
-      <div class="container">
-	<div class="row justify-content-center">
-          <div class="col-lg-8 text-center">
-            <h2 class="text-center mt-0">Global monitoring</h2>
-            <hr class="divider light my-4">
-	    <h3 class="h4 mb-2"> Coming soon... </h3>
-            <p class="text-muted mb-0">This map will show the locations where infections were detected</p>
-          </div>
-         </div>
-           <div style="height: 100%; width: 100%"></div>
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 text-center">
+          <h2 class="text-center mt-0">Global monitoring</h2>
+          <hr class="divider light my-4">
         </div>
+        <div class="col-lg-12 text-center">
+          <div id="myMap" style="width: 100%; height: 250px" aria-label="Map showing the location of infections"></div>
+        </div>
+      </div>
+    </div>
   </section>
 
 
@@ -315,16 +315,14 @@
     </div>
   </footer>
 
-  <!-- Bootstrap core JavaScript -->
-  <script src="static/vendor/jquery/jquery.min.js"></script>
-  <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Plugin JavaScript -->
-  <script src="static/vendor/jquery-easing/jquery.easing.min.js"></script>
-  <script src="static/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
-
-  <!-- Custom scripts for this template -->
-  <script src="static/creative.min.js"></script>
+  <!-- Bootstrap core JS-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+  <!-- Third party plugin JS-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+  <!-- Core theme JS-->
+  <script src="static/js/scripts.js"></script>
 
   <!-- Scroll to appropriate place at startup -->
   {% if scroll %}
