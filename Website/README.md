@@ -1,4 +1,4 @@
-# Project "Superbugs on Paper" website built from "Creative - Bootstrap Starter Template"
+# Project "Superbugs on Paper" website design built from "Creative - Bootstrap Starter Template"
 
 # [Start Bootstrap - Creative](https://startbootstrap.com/template-overviews/creative/)
 
